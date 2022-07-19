@@ -6,9 +6,9 @@ runs:
   steps:
     - name: Download libtorch
       run: |
-        wget "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.11.0%2Bcpu.zip"
-        echo "5b5ea3067f878dea051f6fcd8fb00338f55517cb6baecdc810983a814e030845 libtorch-cxx11-abi-shared-with-deps-1.11.0+cpu.zip" | sha256sum -c -
-        unzip libtorch-cxx11-abi-shared-with-deps-1.11.0+cpu.zip
+        wget "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.12.0%2Bcpu.zip"
+        echo "0f0f36219862a4ed0ad0522c4de97e9e189194b44eb09036d2b94bea456260c6 libtorch-cxx11-abi-shared-with-deps-1.12.0+cpu.zip" | sha256sum -c -
+        unzip libtorch-cxx11-abi-shared-with-deps-1.12.0+cpu.zip
         echo "LIBTORCH=$(realpath libtorch)" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(realpath libtorch)/lib" >> $GITHUB_ENV
       shell: bash

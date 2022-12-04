@@ -1,6 +1,10 @@
+name: 'syntaxdot-libtorch'
+description: "Download libtorch"
+
 inputs:
-  name:
-    description: "Download libtorch"
+  device:
+    description: "Device build"
+    default: "cpu"
 runs:
   using: "composite"
   steps:
@@ -11,4 +15,16 @@ runs:
         unzip libtorch-cxx11-abi-shared-with-deps-1.13.0+cpu.zip
         echo "LIBTORCH=$(realpath libtorch)" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(realpath libtorch)/lib" >> $GITHUB_ENV
+        rm libtorch-cxx11-abi-shared-with-deps-1.13.0+cpu.zip
       shell: bash
+      if: ${{ inputs.device == 'cpu' }}
+    - name: Download libtorch (CUDA)
+      run: |
+        wget "https://download.pytorch.org/libtorch/cu117/libtorch-cxx11-abi-shared-with-deps-1.13.0%2Bcu117.zip"
+        echo "0a013dceedb252f4965b666a2ad772d962135597db5889bd5d43644697c17dbc libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip" | sha256sum -c -
+        unzip libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip
+        echo "LIBTORCH=$(realpath libtorch)" >> $GITHUB_ENV
+        echo "LD_LIBRARY_PATH=$(realpath libtorch)/lib" >> $GITHUB_ENV
+        rm libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip
+      shell: bash
+      if: ${{ inputs.device == 'cuda' }}

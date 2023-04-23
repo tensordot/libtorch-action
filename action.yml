@@ -10,21 +10,21 @@ runs:
   steps:
     - name: Download libtorch
       run: |
-        wget "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.13.0%2Bcpu.zip"
-        echo "d52f63577a07adb0bfd6d77c90f7da21896e94f71eb7dcd55ed7835ccb3b2b59 libtorch-cxx11-abi-shared-with-deps-1.13.0+cpu.zip" | sha256sum -c -
-        unzip libtorch-cxx11-abi-shared-with-deps-1.13.0+cpu.zip
+        wget "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.0.0%2Bcpu.zip"
+        echo "2d67cff381186f2a01140348d2da7ab35d2e526c5703f4a8312c9428bef6df88 libtorch-cxx11-abi-shared-with-deps-2.0.0+cpu.zip" | sha256sum -c -
+        unzip libtorch-cxx11-abi-shared-with-deps-2.0.0+cpu.zip
         echo "LIBTORCH=$(realpath libtorch)" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(realpath libtorch)/lib" >> $GITHUB_ENV
-        rm libtorch-cxx11-abi-shared-with-deps-1.13.0+cpu.zip
+        rm libtorch-cxx11-abi-shared-with-deps-2.0.0+cpu.zip
       shell: bash
       if: ${{ inputs.device == 'cpu' }}
     - name: Download libtorch (CUDA)
       run: |
-        wget "https://download.pytorch.org/libtorch/cu117/libtorch-cxx11-abi-shared-with-deps-1.13.0%2Bcu117.zip"
-        echo "0a013dceedb252f4965b666a2ad772d962135597db5889bd5d43644697c17dbc libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip" | sha256sum -c -
-        unzip libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip
+        wget "https://download.pytorch.org/libtorch/cu118/libtorch-cxx11-abi-shared-with-deps-2.0.0%2Bcu118.zip"
+        echo "292b3f81e7c857fc102be93e2e44c40cdb4d8ef03d98121bc6af434c66e8490b libtorch-cxx11-abi-shared-with-deps-2.0.0+cu118.zip" | sha256sum -c -
+        unzip libtorch-cxx11-abi-shared-with-deps-2.0.0+cu118.zip
         echo "LIBTORCH=$(realpath libtorch)" >> $GITHUB_ENV
         echo "LD_LIBRARY_PATH=$(realpath libtorch)/lib" >> $GITHUB_ENV
-        rm libtorch-cxx11-abi-shared-with-deps-1.13.0+cu117.zip
+        rm libtorch-cxx11-abi-shared-with-deps-2.0.0+cu118.zip
       shell: bash
       if: ${{ inputs.device == 'cuda' }}
